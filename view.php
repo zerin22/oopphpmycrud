@@ -11,44 +11,44 @@
           <div class="mt-2">
               <a href="index.php" class="d-block text-right">All Post</a>
           </div>
-
-          <table class="table table-bordered">
-            <tr>
-              <th>Post Title</th>
-              <th>Description</th>
-              <th>Action</th>
-            </tr>
-            <?php
-              $getPost = $post->getAllPost();
-
-              if($getPost)
+          <?php
+            if(isset($_GET['id']) && is_numeric($_GET['id']))
+            {
+              $id = $_GET['id'];
+              $getPost = $post->viewSinglePost($id);
+              if($getPost != Null)
               {
-                while($data = $getPost->fetch_assoc())
-                {
-            ?>
-                  <tr>
-                    <td><?php echo $data['title'];?></td>
-                    <td><?php echo $data['description'];?></td>
-                    <td>
-                      <a href="view.php?id=<?php echo $data['id'];?>" class="btn btn-primary">View</a>|
-                      <a href="edit.php?id=<?php echo $data['id'];?>" class="btn btn-warning">Edit</a>|
-                      <a href="?id=<?php echo $data['id'];?>" class="btn btn-danger">Delete</a>
-                    </td>
-                  </tr>
-            <?php
-                }
+                $data = $getPost->fetch_assoc();
+          ?>
+              <img src="asset/img/<?php echo $data['image']; ?>" alt="No image found" class="img-fluid">
+              <hr>
+              <div>
+                <h6 class="text-center">
+                  <?php echo $data['title'];?>
+                  Posted On:<?php echo date("F j, Y, g:i a", strtotime($data['created_at'])); ?>
+                </h6>
+                
+              </div>
+              <p class="text-justify">
+                <?php echo $data['description'];?>
+              </p>
+          <?php 
               }else{
-            ?>
-                    <tr>
-                      <td colspan="3" class="text-center text-danger">
-                          No Post Found
-                      </td>
-                    </tr>
-            <?php
+          ?>
+                <div class="alert alert-danger text-center" role="alert">
+                  Post Not Found!
+                </div>
+          <?php
               }
-            ?>
-
-          </table>
+            }else{
+          ?>
+            <div class="alert alert-danger text-center" role="alert">
+                  Something went wrong! Please try again later.
+                </div>
+          <?php    
+            }
+        
+          ?>
         </div>
       </div>
     </div>    
