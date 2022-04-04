@@ -1,6 +1,6 @@
 <?php 
     require_once('header.php');
-
+   
 ?>
 
 
@@ -43,8 +43,8 @@
             }else{
           ?>
             <div class="alert alert-danger text-center" role="alert">
-                  Something went wrong! Please try again later.
-                </div>
+              Something went wrong! Please try again later.
+            </div>
           <?php    
             }
         

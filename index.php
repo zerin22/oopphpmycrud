@@ -17,7 +17,8 @@
            //isset function checking if the variable is set or not
             if(isset($deletePost))
             {
-              print_r($deletePost);
+              echo $deletePost;
+              header( "refresh:3;url=index.php" );
             }
           ?>
           <div class="mt-5 float-right">
